@@ -13,7 +13,7 @@ class LOD(ViewController):
     def __init__(self, view: "MapView"):
         self.view = view
         super().__init__()
-        self.position = Vec3(0, 0, -5)
+        self.position = Vec3(0.5, 1, -0.5)
         self.rotation_smoothing = 10
         self.origin_y = -0.5
         self.speed = 1

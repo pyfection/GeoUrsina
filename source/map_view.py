@@ -1,7 +1,5 @@
 from enum import Enum
 
-from ursina import Sprite
-
 from lod import LOD
 from lod.radial import RadialLOD
 from nodes import Node
@@ -14,7 +12,7 @@ class MapMode(Enum):
     PLANAR = PlaneNode
 
 
-class MapView(Sprite):
+class MapView:
     """Main class for viewing the map."""
     sprites = {}
     mode: MapMode
@@ -27,4 +25,3 @@ class MapView(Sprite):
         self.provider = provider
         self.lod = RadialLOD(self)
         self.root_node = mode.value(self)
-        super().__init__(visible=False)

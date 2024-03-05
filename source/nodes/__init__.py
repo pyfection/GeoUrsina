@@ -4,6 +4,7 @@ from enum import Enum
 from typing import TYPE_CHECKING
 
 from ursina import Sprite
+#from ursina import Entity
 
 if TYPE_CHECKING:
     from map_view import MapView
@@ -35,11 +36,14 @@ class Node(ABC):
         texture = self.map_view.provider.fetch_tile(self.level, self.x, self.y)
         lvl = self.level - 1
         self.sprite = Sprite(texture=texture)
+        #self.sprite = Entity(model='cube', texture=texture)
         s = 1/2**lvl
         self.sprite.scale = (s, s, 1)
         # s * 0.5 because it calculates where it is from its center point
         self.sprite.x = self.x / 2 ** lvl + s * 0.5
-        self.sprite.y = 1 - (self.y / 2 ** lvl + s * 0.5)
+        self.sprite.z = 1 - (self.y / 2 ** lvl + s * 0.5)
+        # For testing comment out the next line, makes it very easy to see the subdivisions since the sprites will be vertical instead of horizontal
+        self.sprite.rotation_x = 90
         print("Created node", self.level, self.x, self.y, self.sprite.position, self.sprite.world_position, self.sprite.screen_position)
 
     @property

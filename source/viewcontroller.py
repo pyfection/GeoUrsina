@@ -26,7 +26,7 @@ class ViewController(Entity):
         )
         super().__init__()
         self.speed = 2
-        self.height = 2
+        self.height = 0
         self.camera_pivot = Entity(parent=self, y=self.height)
 
         camera.parent = self.camera_pivot
@@ -44,6 +44,10 @@ class ViewController(Entity):
         self.jumping = False
         self.air_time = 0
 
+        # Turn observer, doesn't seem to work??
+        self.camera_pivot.rotation_x = 45
+        self.rotation_y = 45
+
         for key, value in kwargs.items():
             setattr(self, key, value)
 
@@ -58,7 +62,7 @@ class ViewController(Entity):
                 self.y = ray.world_point.y
 
     def update(self):
-        print("Updating with time.dt", time.dt)
+        #print("Updating with time.dt", time.dt)
         self.rotation_y += mouse.velocity[0] * self.mouse_sensitivity[1]
 
         self.camera_pivot.rotation_x -= (
